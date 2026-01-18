@@ -1,0 +1,25 @@
+{
+  "translation": {
+    "auth": {
+      "form": {
+        "username": "Usuário",
+        "password": "Senha"
+      },
+      "action": {
+        "do_login": "Entrar"
+      },
+      "rule": {
+        "username_is_required": "Usuário deve ser informado",
+        "password_is_required": "Senha deve ser informada"
+      }
+    },
+    "exceptions": {
+      "UNEXPECTED_ERROR": "Ocorreu um erro inesperado",
+      "BAD_REQUEST": "Ocorreu um erro na requisição",
+      "UNAUTHORIZED": "Não autorizado",
+      "FORBIDDEN":  "Acesso negado",
+      "NOT_FOUND": "Recurso não encontrado",
+      "INTERNAL_SERVER_ERROR":  "Erro interno do servidor"
+    }
+  }
+}

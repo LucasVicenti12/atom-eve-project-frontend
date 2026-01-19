@@ -6,11 +6,18 @@
         "password": "Senha"
       },
       "action": {
-        "do_login": "Entrar"
+        "do_login": "Acessar minha conta",
+        "do_register": "Desejo criar uma conta",
+        "do_forgot_password": "Esqueci minha senha"
       },
       "rule": {
         "username_is_required": "Usuário deve ser informado",
         "password_is_required": "Senha deve ser informada"
+      },
+      "label": {
+        "welcome_back": "Seja bem-vindo de volta",
+        "welcome_subtitle": "Informe suas credenciais para acessar sua conta",
+        "or": "ou"
       }
     },
     "exceptions": {

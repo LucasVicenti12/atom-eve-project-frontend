@@ -1,8 +1,8 @@
-import {LoginForm} from "../components/LoginForm.tsx";
 import {Box} from "@mui/joy";
 import {ElevatedBox} from "../../../utils/components/container/ElevatedBox.tsx";
+import {RegisterForm} from "../components/RegisterForm.tsx";
 
-export const Login = () => {
+export const Register = () => {
     return (
         <Box
             sx={{
@@ -15,7 +15,7 @@ export const Login = () => {
                     p: 1
                 }}
             >
-                <LoginForm/>
+                <RegisterForm/>
             </ElevatedBox>
         </Box>
     )

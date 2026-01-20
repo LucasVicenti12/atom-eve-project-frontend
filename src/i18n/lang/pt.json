@@ -3,30 +3,77 @@
     "auth": {
       "form": {
         "username": "Usuário",
-        "password": "Senha"
+        "password": "Senha",
+        "name": "Nome",
+        "confirm_password": "Confirmar senha",
+        "email": "Email"
       },
       "action": {
         "do_login": "Acessar minha conta",
-        "do_register": "Desejo criar uma conta",
-        "do_forgot_password": "Esqueci minha senha"
+        "wish_do_register": "Desejo criar uma conta",
+        "do_forgot_password": "Esqueci minha senha",
+        "do_register": "Criar uma conta"
       },
       "rule": {
         "username_is_required": "Usuário deve ser informado",
-        "password_is_required": "Senha deve ser informada"
+        "password_is_required": "Senha deve ser informada",
+        "name_is_required": "Nome deve ser informado",
+        "email_is_required": "Email deve ser informado",
+        "confirm_password_is_required": "Senha de confirmação deve ser informada"
       },
       "label": {
+        "welcome": "Seja bem-vindo",
+        "register_subtitle": "Preencha o formulário para criar uma conta",
         "welcome_back": "Seja bem-vindo de volta",
         "welcome_subtitle": "Informe suas credenciais para acessar sua conta",
         "or": "ou"
+      },
+      "exceptions": {
+        "passwords_dont_match": "Senhas não se coincidem",
+        "username_is_empty": "O usuário está vázio",
+        "password_is_empty": "A senha está vázia",
+        "name_is_empty": "O nome está vázio",
+        "email_is_empty": "O email está vázio"
+      }
+    },
+    "home": {
+      "label": {
+        "projects": "Projetos",
+        "my_projects": "Meus projetos",
+        "all_projects": "Todos"
+      },
+      "action": {
+        "do_new_project": "Novo projeto"
+      },
+      "placeholder": {
+        "filter_project": "Filtrar por nome"
+      }
+    },
+    "project": {
+      "form": {
+        "name": "Nome",
+        "color": "Cor",
+        "description": "Descrição"
+      },
+      "label": {
+        "title": "Novo projeto"
+      },
+      "rule": {
+        "name_is_empty": "Nome deve ser informado",
+        "color_is_empty": "Cor deve ser informada"
+      },
+      "action": {
+        "cancel": "Cancelar",
+        "create": "Criar"
       }
     },
     "exceptions": {
       "UNEXPECTED_ERROR": "Ocorreu um erro inesperado",
       "BAD_REQUEST": "Ocorreu um erro na requisição",
       "UNAUTHORIZED": "Não autorizado",
-      "FORBIDDEN":  "Acesso negado",
+      "FORBIDDEN": "Acesso negado",
       "NOT_FOUND": "Recurso não encontrado",
-      "INTERNAL_SERVER_ERROR":  "Erro interno do servidor"
+      "INTERNAL_SERVER_ERROR": "Erro interno do servidor"
     }
   }
 }

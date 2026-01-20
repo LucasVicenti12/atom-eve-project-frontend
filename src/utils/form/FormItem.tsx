@@ -1,11 +1,11 @@
 import {FieldValues, Path, RegisterOptions, useFormContext} from "react-hook-form";
 import {ComponentType} from "react";
-import {FormControl, FormHelperText, FormLabel, InputProps} from "@mui/joy";
+import {FormControl, FormHelperText, FormLabel, InputProps, TextareaProps} from "@mui/joy";
 
 interface FormItemProps<T extends FieldValues> {
     name: Path<T>
     label: string
-    component: ComponentType<InputProps>
+    component: ComponentType<InputProps> | ComponentType<TextareaProps>
     options?: RegisterOptions<T>
 }
 
@@ -17,7 +17,7 @@ export const FormItem = <T extends FieldValues>(props: FormItemProps<T>) => {
     const Component = props.component
 
     return (
-        <FormControl error={!!error}>
+        <FormControl error={!!error} sx={{flex: 1}}>
             <FormLabel>{props.label}</FormLabel>
             <Component
                 {...register(props.name, props.options)}

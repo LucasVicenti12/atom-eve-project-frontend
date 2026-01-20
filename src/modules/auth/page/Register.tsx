@@ -1,22 +1,17 @@
-import {Box} from "@mui/joy";
 import {ElevatedBox} from "../../../utils/components/container/ElevatedBox.tsx";
 import {RegisterForm} from "../components/RegisterForm.tsx";
+import {OutScopedPage} from "../../../utils/components/container/OutScopedPage.tsx";
 
-export const Register = () => {
-    return (
-        <Box
+export const Register = () => (
+    <OutScopedPage>
+        <ElevatedBox
             sx={{
-                display: "grid",
-                gridTemplateColumns: "0.3fr",
+                p: 1,
+                backgroundColor: "background.surface",
+                width: "min(35rem, 100%)"
             }}
         >
-            <ElevatedBox
-                sx={{
-                    p: 1
-                }}
-            >
-                <RegisterForm/>
-            </ElevatedBox>
-        </Box>
-    )
-}
+            <RegisterForm/>
+        </ElevatedBox>
+    </OutScopedPage>
+)

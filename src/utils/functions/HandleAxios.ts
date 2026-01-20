@@ -1,14 +1,14 @@
 import {AxiosError, AxiosPromise} from "axios";
 
 const HTTP_STATUS_MESSAGES: Record<number, string> = {
-    400: 'BAD_REQUEST',
-    401: 'UNAUTHORIZED',
-    403: 'FORBIDDEN',
-    404: 'NOT_FOUND',
-    500: 'INTERNAL_SERVER_ERROR',
+    400: 'exceptions.BAD_REQUEST',
+    401: 'exceptions.UNAUTHORIZED',
+    403: 'exceptions.FORBIDDEN',
+    404: 'exceptions.NOT_FOUND',
+    500: 'exceptions.INTERNAL_SERVER_ERROR',
 };
 
-const UNEXPECTED_ERROR = "UNEXPECTED_ERROR";
+const UNEXPECTED_ERROR = "exceptions.UNEXPECTED_ERROR";
 
 export function handleError<T>(e: unknown): T {
     if (e instanceof AxiosError) {

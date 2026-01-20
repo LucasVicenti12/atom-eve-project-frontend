@@ -13,6 +13,7 @@ export interface Register {
     password: string
     name: string
     email: string
+    confirmPassword: string
 }
 
 export interface User {
@@ -27,8 +28,9 @@ export interface User {
 }
 
 export enum AuthErrors {
-    USERNAME_IS_EMPTY = "USERNAME_IS_EMPTY",
-    PASSWORD_IS_EMPTY = "PASSWORD_IS_EMPTY",
-    NAME_IS_EMPTY = "NAME_IS_EMPTY",
-    EMAIL_IS_EMPTY = "EMAIL_IS_EMPTY"
+    USERNAME_IS_EMPTY = "auth.exceptions.username_is_empty",
+    PASSWORD_IS_EMPTY = "auth.exceptions.password_is_empty",
+    NAME_IS_EMPTY = "auth.exceptions.name_is_empty",
+    EMAIL_IS_EMPTY = "auth.exceptions.email_is_empty",
+    PASSWORD_DONT_MATCH = "auth.exceptions.passwords_dont_match"
 }

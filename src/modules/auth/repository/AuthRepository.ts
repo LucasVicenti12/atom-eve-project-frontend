@@ -18,7 +18,7 @@ class AuthRepository {
 
     async register(user: Register): Promise<ApiResponse<User>> {
         return handleRequest(
-            http.post("/user/register", user)
+            http.post("/users/register", user)
         )
     }
 

@@ -1,6 +1,6 @@
-import {Input as MuiInput, styled} from "@mui/joy";
+import {Textarea as MuiTextarea, styled} from "@mui/joy";
 
-export const Input = styled(MuiInput)(() => ({
+export const Textarea = styled(MuiTextarea)(() => ({
     '--Input-radius': '5px',
     '&:hover': {
         borderColor: '#9e9e9e',

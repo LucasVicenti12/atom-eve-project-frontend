@@ -31,6 +31,9 @@ class AuthUseCase {
         if (!user.email) {
             return {error: {code: AuthErrors.EMAIL_IS_EMPTY}}
         }
+        if (user.password !== user.confirmPassword) {
+            return {error: {code: AuthErrors.PASSWORD_DONT_MATCH}}
+        }
 
         return authRepository.register(user)
     }

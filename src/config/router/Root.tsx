@@ -5,6 +5,7 @@ import {Login} from "../../modules/auth/page/Login.tsx";
 import {Home} from "../../modules/home/page/Home.tsx";
 import {Middleware} from "../../modules/auth/provider/Middleware.tsx";
 import {Register} from "../../modules/auth/page/Register.tsx";
+import {Project} from "../../modules/project/page/Project.tsx";
 
 export const Root = () => {
     const routes = createBrowserRouter(
@@ -38,6 +39,10 @@ export const Root = () => {
                     {
                         path: "/home",
                         element: <Home/>,
+                    },
+                    {
+                        path: "/new-project",
+                        element: <Project/>
                     }
                 ]
             }

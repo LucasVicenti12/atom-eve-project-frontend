@@ -9,11 +9,9 @@ interface MiddlewareProps {
 export const Middleware = (props: MiddlewareProps) => {
     const {authenticated, loading} = useAuth()
 
-    if(loading) return
+    if (loading) return
 
-    if(!authenticated){
-        return <Navigate to="/login"/>
-    }
+    if (!authenticated) return <Navigate to="/login"/>
 
     return props.children
 }

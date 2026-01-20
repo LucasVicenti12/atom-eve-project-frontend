@@ -2,7 +2,7 @@ import {Login, Register, User} from "../entities/entities.ts";
 import {JSX, useEffect, useState} from "react";
 import {authUseCase} from "../usecase/AuthUseCase.ts";
 import {AuthContext, AuthContextProps} from "./AuthContext.tsx";
-import {useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 interface AuthProviderProps {
     children: JSX.Element
@@ -10,12 +10,20 @@ interface AuthProviderProps {
 
 export const AuthProvider = (props: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null)
-    const [loading, setLoading] = useState(true)
 
-    const navigate = useNavigate()
+    const [authenticated, setAuthenticated] = useState(false)
+
+    const [loading, setLoading] = useState(true)
+    const location = useLocation()
 
     const login = async (login: Login) => {
-        return authUseCase.login(login)
+        const response = await authUseCase.login(login)
+
+        if(!response.error){
+            setAuthenticated(true)
+        }
+
+        return response
     }
 
     const register = async (register: Register) => {
@@ -28,20 +36,24 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
     useEffect(() => {
         authUseCase.me().then((response) => {
-            if(response.error){
+            if (response.error) {
                 setUser(null)
-            }else{
+                setAuthenticated(false)
+            } else {
                 setUser(response.data as User)
+                setAuthenticated(true)
             }
-        }).finally(() => setLoading(false))
-    }, [setUser, navigate]);
+        }).finally(() => {
+            setLoading(false)
+        })
+    }, [location]);
 
     return (
         <AuthContext.Provider
             value={{
                 user,
                 loading,
-                authenticated: !!user,
+                authenticated: !!user || authenticated,
                 login,
                 register,
                 logout

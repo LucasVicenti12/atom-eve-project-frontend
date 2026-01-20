@@ -4,8 +4,8 @@ import {Box} from "@mui/joy";
 import {ProjectCard} from "./ProjectCard.tsx";
 import {PaginationAtom} from "../../../utils/components/pagination/Pagination.tsx";
 
-export const ProjectListAll = () => {
-    const paginated = useAtomValue(ProjectState.PaginatedAll)
+export const ProjectListMine = () => {
+    const paginated = useAtomValue(ProjectState.PaginatedMine)
 
     switch (paginated.state) {
         case "hasError":

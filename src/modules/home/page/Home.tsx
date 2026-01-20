@@ -6,6 +6,7 @@ import {Input} from "../../../utils/components/core/Input"
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {ProjectListAll} from "../../project/components/ProjectListAll.tsx";
+import {ProjectListMine} from "../../project/components/ProjectListMine.tsx";
 
 export const Home = () => {
     const {t} = useTranslation()
@@ -79,10 +80,10 @@ export const Home = () => {
                         }}
                     >
                         <Tab value={0}>
-                            {t("home.label.my_projects")}
+                            {t("home.label.all_projects")}
                         </Tab>
                         <Tab value={1}>
-                            {t("home.label.all_projects")}
+                            {t("home.label.my_projects")}
                         </Tab>
                     </TabList>
                     <Input
@@ -91,11 +92,12 @@ export const Home = () => {
                     />
                 </Box>
                 <Divider/>
-                <TabPanel value={0}>
+                <Box sx={{mt: 2}}/>
+                <TabPanel value={0} sx={{p: 0}}>
                     <ProjectListAll/>
                 </TabPanel>
-                <TabPanel value={1}>
-                    ABA 2
+                <TabPanel value={1} sx={{p: 0}}>
+                    <ProjectListMine/>
                 </TabPanel>
             </Tabs>
         </CenteredPage>

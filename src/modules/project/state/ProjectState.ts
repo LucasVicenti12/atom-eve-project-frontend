@@ -2,14 +2,26 @@ import {atom} from "jotai";
 import {loadable} from "jotai/utils";
 import {projectUseCase} from "../usecase/ProjectUseCase.ts";
 
-const Page = atom(0)
-
 const Change = atom(false)
 
-const Paginated = loadable(atom(async (get) => {
-    const page = get(Page)
+const PageAll = atom(0)
 
-    const response = await projectUseCase.getPaginated(page, 10)
+const PaginatedAll = loadable(atom(async (get) => {
+    const page = get(PageAll)
+
+    const response = await projectUseCase.getPaginated(page, 10, true)
+
+    if (!response.data) return null
+
+    return response.data
+}))
+
+const PageMine = atom(0)
+
+const PaginatedMine = loadable(atom(async (get) => {
+    const page = get(PageMine)
+
+    const response = await projectUseCase.getPaginated(page, 10, false)
 
     if (!response.data) return null
 
@@ -17,7 +29,9 @@ const Paginated = loadable(atom(async (get) => {
 }))
 
 export default {
-    Page,
     Change,
-    Paginated,
+    PageAll,
+    PaginatedAll,
+    PageMine,
+    PaginatedMine
 }

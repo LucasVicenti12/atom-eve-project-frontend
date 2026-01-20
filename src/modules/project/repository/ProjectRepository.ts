@@ -10,9 +10,9 @@ class ProjectRepository {
         )
     }
 
-    async getPaginated(page: number, count: number): Promise<ApiResponse<Pagination<Project>>> {
+    async getPaginated(page: number, count: number, all: boolean): Promise<ApiResponse<Pagination<Project>>> {
         return handleRequest(
-            http.get("/projects", {params: {count, page}})
+            http.get("/projects/all", {params: {count, page, all}})
         )
     }
 }

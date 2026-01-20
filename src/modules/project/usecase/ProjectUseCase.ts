@@ -7,8 +7,8 @@ class ProjectUseCase {
         return projectRepository.register(project)
     }
 
-    async getPaginated(page: number, count: number): Promise<ApiResponse<Pagination<Project>>> {
-        return projectRepository.getPaginated(page, count)
+    async getPaginated(page: number, count: number, all: boolean): Promise<ApiResponse<Pagination<Project>>> {
+        return projectRepository.getPaginated(page, count, all)
     }
 }
 

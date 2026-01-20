@@ -5,6 +5,7 @@ import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded';
 import {Input} from "../../../utils/components/core/Input"
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {ProjectListAll} from "../../project/components/ProjectListAll.tsx";
 
 export const Home = () => {
     const {t} = useTranslation()
@@ -91,7 +92,7 @@ export const Home = () => {
                 </Box>
                 <Divider/>
                 <TabPanel value={0}>
-                    ABA 1
+                    <ProjectListAll/>
                 </TabPanel>
                 <TabPanel value={1}>
                     ABA 2

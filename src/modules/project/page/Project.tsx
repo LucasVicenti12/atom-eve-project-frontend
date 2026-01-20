@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 
 import AddToQueueRoundedIcon from '@mui/icons-material/AddToQueueRounded';
 import {ProjectForm} from "../components/ProjectForm.tsx";
+import {ElevatedBox} from "../../../utils/components/container/ElevatedBox.tsx";
 
 export const Project = () => {
     const {t} = useTranslation()
@@ -33,7 +34,14 @@ export const Project = () => {
                 </Box>
             </Box>
             <Box sx={{mt: 2}}/>
-            <ProjectForm/>
+            <ElevatedBox
+                sx={{
+                    p: 1,
+                    backgroundColor: "background.surface",
+                }}
+            >
+                <ProjectForm/>
+            </ElevatedBox>
         </CenteredPage>
     )
 }

@@ -2,27 +2,49 @@ import {FieldValues, useForm} from "react-hook-form";
 import {FormContainer} from "../../../utils/components/container/FormContainer.tsx";
 import {Input} from "../../../utils/components/core/Input.tsx";
 import {FormItem} from "../../../utils/form/FormItem.tsx";
-import {Box, Button} from "@mui/joy";
+import {Box, Button, FormControl, FormHelperText, FormLabel, TextareaProps, useTheme} from "@mui/joy";
 import {Textarea} from "../../../utils/components/input/TextArea.tsx";
 import {useNavigate} from "react-router-dom";
 
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import {useTranslation} from "react-i18next";
+import {ColorPicker} from "../../../utils/components/color/ColorPicker.tsx";
+import {useRef} from "react";
+import {projectUseCase} from "../usecase/ProjectUseCase.ts";
+import {popup} from "../../../utils/alerts/Popup.ts";
 
 export const ProjectForm = () => {
     const {t} = useTranslation()
+    const theme = useTheme()
+
+    const colors: string[] = theme.palette.primary as unknown as string[]
+    const defaultColor: string = colors[500]
+    const colorRef = useRef<string>(defaultColor)
 
     const form = useForm()
+
+    const {formState: {errors}} = form
+    const colorError = (errors["color"]?.message ?? "") as string
 
     const nav = useNavigate()
 
     const handleSubmitRegister = (data: FieldValues) => {
-        console.log(data)
+        projectUseCase.register({
+            color: colorRef.current,
+            name: data.name,
+            description: data.description
+        }).then((response) => {
+            if (response.error) {
+                popup.toast("error", t(response.error.code), 2000).then()
+            } else {
+                nav("/home")
+            }
+        })
     }
 
-    const Description = () => (
-        <Textarea minRows={4}/>
+    const Description = (props: TextareaProps) => (
+        <Textarea minRows={4} {...props}/>
     )
 
     return (
@@ -38,12 +60,16 @@ export const ProjectForm = () => {
                     options={{required: t("project.rule.name_is_empty")}}
                 />
                 <Box sx={{flex: 0.5}}>
-                    <FormItem
-                        name={"color"}
-                        label={t("project.form.color")}
-                        component={Input}
-                        options={{required: t("project.rule.color_is_empty")}}
-                    />
+                    <FormControl error={!!colorError}>
+                        <FormLabel>{t("project.form.color")}</FormLabel>
+                        <ColorPicker
+                            initialColor={defaultColor}
+                            onChange={(color) => colorRef.current = color}
+                        />
+                        <FormHelperText sx={{mt: 0.1, fontSize: "0.75rem"}}>
+                            {colorError}&nbsp;
+                        </FormHelperText>
+                    </FormControl>
                 </Box>
             </Box>
             <FormItem

@@ -8,4 +8,12 @@ export interface ApiResponse<T> {
     error?: ApiError
 }
 
+export interface Pagination<T> {
+    items: T[]
+    totalPages: number
+    totalCount: number
+    page: number
+    count: number
+}
+
 export const UserToken = "user-token"

@@ -67,6 +67,11 @@
         "create": "Criar"
       }
     },
+    "general": {
+      "components": {
+        "color_picker": "Selecionar cor"
+      }
+    },
     "exceptions": {
       "UNEXPECTED_ERROR": "Ocorreu um erro inesperado",
       "BAD_REQUEST": "Ocorreu um erro na requisição",

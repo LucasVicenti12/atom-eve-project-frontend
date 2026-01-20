@@ -1,12 +1,12 @@
 import {Textarea as MuiTextarea, styled} from "@mui/joy";
 
 export const Textarea = styled(MuiTextarea)(() => ({
-    '--Input-radius': '5px',
+    '--Textarea-radius': '5px',
     '&:hover': {
         borderColor: '#9e9e9e',
     },
     '&::before': {
-        borderBottom: '5px solid var(--Input-focusedHighlight)',
+        borderBottom: '5px solid var(--Textarea-focusedHighlight)',
         transform: 'scaleX(0)',
         left: 0,
         right: 0,

@@ -15,6 +15,12 @@ class ProjectRepository {
             http.get("/projects/all", {params: {count, page, all}})
         )
     }
+
+    async getByUUID(uuid: string): Promise<ApiResponse<Project>> {
+        return handleRequest(
+            http.get(`/projects/uuid/${uuid}`)
+        )
+    }
 }
 
 export const projectRepository = new ProjectRepository()

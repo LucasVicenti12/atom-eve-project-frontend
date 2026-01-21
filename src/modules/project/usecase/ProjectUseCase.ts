@@ -10,6 +10,10 @@ class ProjectUseCase {
     async getPaginated(page: number, count: number, all: boolean): Promise<ApiResponse<Pagination<Project>>> {
         return projectRepository.getPaginated(page, count, all)
     }
+
+    async getByUUID(uuid: string): Promise<ApiResponse<Project>> {
+        return projectRepository.getByUUID(uuid)
+    }
 }
 
 export const projectUseCase = new ProjectUseCase()

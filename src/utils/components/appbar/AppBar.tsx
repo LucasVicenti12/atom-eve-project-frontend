@@ -2,9 +2,11 @@ import {ToggleLanguageButton} from "../../../i18n/component/ToggleLanguageButton
 import {Avatar, Box, Stack, Typography} from "@mui/joy";
 import {ToggleThemeButton} from "../theme/ToggleThemeButton.tsx";
 import {useAuth} from "../../../modules/auth/provider/UseAuth.ts";
+import {useNavigate} from "react-router-dom";
 
 export const AppBar = () => {
     const {user} = useAuth()
+    const nav = useNavigate()
 
     return (
         <Box
@@ -16,8 +18,17 @@ export const AppBar = () => {
             }}
         >
             <Stack direction={"row"} alignItems={"center"} gap={1}>
-                <Typography level={"title-lg"} color={"neutral"}>
-                    Atom
+                <Typography
+                    level={"title-lg"}
+                    color={"neutral"}
+                    sx={{
+                        cursor: "pointer",
+                    }}
+                    onClick={() => {
+                        nav("/home")
+                    }}
+                >
+                    &nbsp;
                 </Typography>
             </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={1}>

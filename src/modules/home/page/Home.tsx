@@ -86,10 +86,12 @@ export const Home = () => {
                             {t("home.label.my_projects")}
                         </Tab>
                     </TabList>
-                    <Input
-                        size={"md"}
-                        placeholder={t("home.placeholder.filter_project")}
-                    />
+                    <Box>
+                        <Input
+                            size={"md"}
+                            placeholder={t("home.placeholder.filter_project")}
+                        />
+                    </Box>
                 </Box>
                 <Divider/>
                 <Box sx={{mt: 2}}/>

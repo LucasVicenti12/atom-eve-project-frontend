@@ -1,50 +1,16 @@
 import {CenteredPage} from "../../../utils/components/container/CenteredPage.tsx";
-import {Box, Button, TabList, Tabs, Tab, Typography, tabClasses, TabPanel, Divider} from "@mui/joy";
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded';
+import {Box, TabList, Tabs, Tab, tabClasses, TabPanel, Divider} from "@mui/joy";
 import {Input} from "../../../utils/components/core/Input"
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
 import {ProjectListAll} from "../../project/components/ProjectListAll.tsx";
 import {ProjectListMine} from "../../project/components/ProjectListMine.tsx";
+import {NewProjectButton} from "../../project/components/NewProjectButton.tsx";
 
 export const Home = () => {
     const {t} = useTranslation()
 
-    const nav = useNavigate()
-
     return (
         <CenteredPage sx={{gap: 1}}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center"
-                }}
-            >
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        gap: 1.5
-                    }}
-                >
-                    <AccountTreeRoundedIcon sx={{fontSize: "1.5rem"}}/>
-                    <Typography level={"h3"} color={"neutral"} fontWeight={"bold"}>
-                        {t("home.label.projects")}
-                    </Typography>
-                </Box>
-                <Button
-                    startDecorator={<AddRoundedIcon/>}
-                    onClick={() => {
-                        nav("/new-project")
-                    }}
-                >
-                    {t("home.action.do_new_project")}
-                </Button>
-            </Box>
             <Tabs sx={{backgroundColor: 'transparent'}}>
                 <Box
                     sx={{
@@ -86,11 +52,18 @@ export const Home = () => {
                             {t("home.label.my_projects")}
                         </Tab>
                     </TabList>
-                    <Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 0.5
+                        }}
+                    >
                         <Input
                             size={"md"}
                             placeholder={t("home.placeholder.filter_project")}
                         />
+                        <NewProjectButton/>
                     </Box>
                 </Box>
                 <Divider/>

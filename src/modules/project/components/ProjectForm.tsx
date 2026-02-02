@@ -14,7 +14,11 @@ import {useRef} from "react";
 import {projectUseCase} from "../usecase/ProjectUseCase.ts";
 import {popup} from "../../../utils/alerts/Popup.ts";
 
-export const ProjectForm = () => {
+interface ProjectFormProps {
+    cancel: () => void
+}
+
+export const ProjectForm = (props: ProjectFormProps) => {
     const {t} = useTranslation()
     const theme = useTheme()
 
@@ -38,7 +42,7 @@ export const ProjectForm = () => {
             if (response.error) {
                 popup.toast("error", t(response.error.code), 2000).then()
             } else {
-                nav("/home")
+                nav(`/project/${response.data!.uuid!}`)
             }
         })
     }
@@ -83,7 +87,7 @@ export const ProjectForm = () => {
                     color={"danger"}
                     sx={{flex: 1}}
                     startDecorator={<CloseRoundedIcon/>}
-                    onClick={() => nav("/home")}
+                    onClick={() => props.cancel()}
                 >
                     {t("project.action.cancel")}
                 </Button>

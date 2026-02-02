@@ -5,9 +5,10 @@ import {Login} from "../../modules/auth/page/Login.tsx";
 import {Home} from "../../modules/home/page/Home.tsx";
 import {Middleware} from "../../modules/auth/provider/Middleware.tsx";
 import {Register} from "../../modules/auth/page/Register.tsx";
-import {NewProject} from "../../modules/project/page/NewProject.tsx";
 import {Project} from "../../modules/project/page/Project.tsx";
 import ProjectLoader from "../../modules/project/loader/ProjectLoader.ts";
+import {ProjectRoot} from "../../modules/project/components/ProjectRoot.tsx";
+import {Platforms} from "../../modules/platforms/page/Platforms.tsx";
 
 export const Root = () => {
     const routes = createBrowserRouter(
@@ -43,14 +44,20 @@ export const Root = () => {
                         element: <Home/>,
                     },
                     {
-                        path: "/new-project",
-                        element: <NewProject/>
-                    },
-                    {
                         path: "/project/:uuid",
-                        element: <Project/>,
+                        element: <ProjectRoot/>,
                         id: ProjectLoader.ID,
                         loader: ProjectLoader.Loader,
+                        children: [
+                            {
+                                path: "",
+                                element: <Project/>
+                            },
+                            {
+                                path: "platforms",
+                                element: <Platforms/>
+                            }
+                        ]
                     }
                 ]
             }

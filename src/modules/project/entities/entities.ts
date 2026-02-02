@@ -1,6 +1,7 @@
 import {User} from "../../auth/entities/entities.ts";
 
 export interface CreateProject {
+    uuid?: string
     name: string
     color: string
     description: string

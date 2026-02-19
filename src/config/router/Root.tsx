@@ -54,7 +54,7 @@ export const Root = () => {
                                 element: <Project/>
                             },
                             {
-                                path: "platforms",
+                                path: "platform",
                                 element: <Platforms/>
                             }
                         ]

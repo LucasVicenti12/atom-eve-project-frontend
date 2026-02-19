@@ -65,6 +65,14 @@
       "action": {
         "cancel": "Cancelar",
         "create": "Criar"
+      },
+      "menu": {
+        "title": {
+          "general": "Informações gerais",
+          "task": "Tarefas",
+          "platform": "Plataformas",
+          "config": "Configuração"
+        }
       }
     },
     "general": {

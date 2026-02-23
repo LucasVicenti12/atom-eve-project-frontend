@@ -1,6 +1,8 @@
 import {LoaderFunctionArgs, redirect, useRouteLoaderData} from "react-router-dom";
 import {projectUseCase} from "../usecase/ProjectUseCase.ts";
 import {Project} from "../entities/entities.ts";
+import {http} from "../../../config/http/Http.ts";
+import {InternalAxiosRequestConfig} from "axios";
 
 const ID = "project-detail"
 
@@ -12,6 +14,12 @@ async function Loader(props: LoaderFunctionArgs) {
     if(response.error){
         redirect("/home")
     }
+
+    http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+        config.headers["Project-UUID"] = response.data?.uuid ?? ""
+
+        return config
+    })
 
     return response.data!
 }

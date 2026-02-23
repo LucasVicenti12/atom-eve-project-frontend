@@ -1,0 +1,13 @@
+{
+  "label": {
+    "projects": "Projetos",
+    "my_projects": "Meus projetos",
+    "all_projects": "Todos"
+  },
+  "action": {
+    "do_new_project": "Novo projeto"
+  },
+  "placeholder": {
+    "filter_project": "Filtrar por nome"
+  }
+}

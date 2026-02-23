@@ -1,17 +1,33 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouteObject, RouterProvider} from "react-router-dom";
 import {AuthProvider} from "../../modules/auth/provider/AuthProvider.tsx";
 import {Page} from "../../utils/default/Page.tsx";
 import {Login} from "../../modules/auth/page/Login.tsx";
-import {Home} from "../../modules/home/page/Home.tsx";
 import {Middleware} from "../../modules/auth/provider/Middleware.tsx";
 import {Register} from "../../modules/auth/page/Register.tsx";
-import {Project} from "../../modules/project/page/Project.tsx";
-import ProjectLoader from "../../modules/project/loader/ProjectLoader.ts";
-import {ProjectRoot} from "../../modules/project/components/ProjectRoot.tsx";
-import {Platforms} from "../../modules/platforms/page/Platforms.tsx";
+import {useRoutes} from "./routes/useRoutes.tsx";
+import {EveRoute} from "../../utils/entities/entities.ts";
+import {isValidElement} from "react";
 
 export const Root = () => {
-    const routes = createBrowserRouter(
+    const routes = useRoutes()
+
+    const handleRoute = (route: EveRoute, path?: string): RouteObject => {
+        const subpath = path ? `${path}${route.path}` : route.path
+
+        if (isValidElement(route.children)) {
+            return {
+                path: subpath,
+                element: route.children
+            }
+        } else {
+            return {
+                path: subpath,
+                children: route.children!.map((x: EveRoute) => handleRoute(x))
+            }
+        }
+    }
+
+    const router = createBrowserRouter(
         [
             {
                 path: "/login",
@@ -38,28 +54,7 @@ export const Root = () => {
                         </Middleware>
                     </AuthProvider>
                 ),
-                children: [
-                    {
-                        path: "/home",
-                        element: <Home/>,
-                    },
-                    {
-                        path: "/project/:uuid",
-                        element: <ProjectRoot/>,
-                        id: ProjectLoader.ID,
-                        loader: ProjectLoader.Loader,
-                        children: [
-                            {
-                                path: "",
-                                element: <Project/>
-                            },
-                            {
-                                path: "platform",
-                                element: <Platforms/>
-                            }
-                        ]
-                    }
-                ]
+                children: routes.map((x: EveRoute) => handleRoute(x))
             }
         ], {
             basename: "/app"
@@ -67,6 +62,6 @@ export const Root = () => {
     );
 
     return (
-        <RouterProvider router={routes}/>
+        <RouterProvider router={router}/>
     )
 }

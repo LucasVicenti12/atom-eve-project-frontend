@@ -1,0 +1,8 @@
+{
+  "UNEXPECTED_ERROR": "Ocorreu um erro inesperado",
+  "BAD_REQUEST": "Ocorreu um erro na requisição",
+  "UNAUTHORIZED": "Não autorizado",
+  "FORBIDDEN": "Acesso negado",
+  "NOT_FOUND": "Recurso não encontrado",
+  "INTERNAL_SERVER_ERROR": "Erro interno do servidor"
+}

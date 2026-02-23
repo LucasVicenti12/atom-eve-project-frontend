@@ -1,0 +1,26 @@
+{
+  "form": {
+    "name": "Nome",
+    "color": "Cor",
+    "description": "Descrição"
+  },
+  "label": {
+    "title": "Novo projeto"
+  },
+  "rule": {
+    "name_is_empty": "Nome deve ser informado",
+    "color_is_empty": "Cor deve ser informada"
+  },
+  "action": {
+    "cancel": "Cancelar",
+    "create": "Criar"
+  },
+  "menu": {
+    "title": {
+      "general": "Informações gerais",
+      "task": "Tarefas",
+      "platform": "Plataformas",
+      "config": "Configuração"
+    }
+  }
+}

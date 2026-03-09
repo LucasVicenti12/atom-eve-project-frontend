@@ -11,17 +11,19 @@ import {isValidElement} from "react";
 export const Root = () => {
     const routes = useRoutes()
 
-    const handleRoute = (route: EveRoute, path?: string): RouteObject => {
-        const subpath = path ? `${path}${route.path}` : route.path
-
+    const handleRoute = (route: EveRoute): RouteObject => {
         if (isValidElement(route.children)) {
             return {
-                path: subpath,
+                id: route.id,
+                path: route.path,
+                loader: route.loader,
                 element: route.children
             }
         } else {
             return {
-                path: subpath,
+                id: route.id,
+                path: route.path,
+                loader: route.loader,
                 children: route.children!.map((x: EveRoute) => handleRoute(x))
             }
         }

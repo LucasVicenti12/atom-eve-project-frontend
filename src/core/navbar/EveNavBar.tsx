@@ -8,7 +8,7 @@ import LayoutState from "../../utils/components/layout/state/LayoutState.ts";
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import {EveRoute} from "../../utils/entities/entities.ts";
-import {useLocation, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
 import {useAuth} from "../../modules/auth/provider/UseAuth.ts";
 import {popup} from "../../utils/alerts/Popup.ts";
 
@@ -93,6 +93,7 @@ export const EveNavBar = () => {
                         <EveNavBarOption
                             key={`crm_nav_bar_option_${i}`}
                             basePath={current.path}
+                            isCurrent={current.path === x.path}
                             {...x}
                         />
                     ))
@@ -135,13 +136,11 @@ export const EveNavBar = () => {
 
 interface CrmNavBarOptionProps extends EveRoute {
     basePath: string
+    isCurrent: boolean
 }
 
 const EveNavBarOption = (props: CrmNavBarOptionProps) => {
     const nav = useNavigate()
-    const location = useLocation()
-
-    const pathname = location.pathname
 
     const open = useAtomValue(LayoutState.NavOpen)
 
@@ -149,25 +148,23 @@ const EveNavBarOption = (props: CrmNavBarOptionProps) => {
 
     const subpath = props.path ? `/${props.basePath}/${props.path}` : `/${props.basePath}`
 
-    const isCurrent = pathname === subpath
-
     return (
         <ListItem onClick={() => nav(subpath)}>
             {
                 open ? (
                     <ListItemButton
                         sx={{height: "40px"}}
-                        color={isCurrent ? "primary" : "neutral"}
-                        variant={isCurrent ? "soft" : "plain"}
+                        color={props.isCurrent ? "primary" : "neutral"}
+                        variant={props.isCurrent ? "soft" : "plain"}
                     >
                         <Icon
                             fontSize={"small"}
-                            color={isCurrent ? "primary" : "inherit"}
+                            color={props.isCurrent ? "primary" : "inherit"}
                         />
                         <ListItemContent>
                             <Typography
                                 level="title-sm"
-                                color={isCurrent ? "primary" : "neutral"}
+                                color={props.isCurrent ? "primary" : "neutral"}
                                 sx={{
                                     textWrap: "nowrap",
                                 }}
@@ -178,7 +175,7 @@ const EveNavBarOption = (props: CrmNavBarOptionProps) => {
                     </ListItemButton>
                 ) : (
                     <ListItemButton
-                        color={isCurrent ? "primary" : "neutral"}
+                        color={props.isCurrent ? "primary" : "neutral"}
                         sx={{
                             display: "flex",
                             justifyContent: "center",
@@ -188,7 +185,7 @@ const EveNavBarOption = (props: CrmNavBarOptionProps) => {
                     >
                         <Icon
                             fontSize={"small"}
-                            color={isCurrent ? "primary" : "inherit"}
+                            color={props.isCurrent ? "primary" : "inherit"}
                         />
                     </ListItemButton>
                 )

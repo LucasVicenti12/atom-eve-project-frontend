@@ -8,15 +8,16 @@ import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import InsertChartOutlinedRoundedIcon from "@mui/icons-material/InsertChartOutlinedRounded";
 import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
 import {useTranslation} from "react-i18next";
-import {useLocation} from "react-router-dom";
+import {matchPath, useLocation} from "react-router-dom";
 
 export function useCurrentRoute(): EveRoute {
     const routes = useRoutes()
     const location = useLocation()
 
-    return routes.filter(
-        x => location.pathname.includes(`/${x.path}`)
-    )[0]
+    return routes.find(x => matchPath(
+        {path: `/${x.path}`, end: false},
+        location.pathname
+    ))!
 }
 
 export function useRoutes(): EveRoute[] {
@@ -27,9 +28,10 @@ export function useRoutes(): EveRoute[] {
             path: "home",
             label: t("modules.home"),
             children: <Home/>,
+            appBar: true,
         },
         {
-            path: "project/:uuid",
+            path: "project",
             id: ProjectLoader.ID,
             loader: ProjectLoader.Loader,
             label: t("modules.project"),

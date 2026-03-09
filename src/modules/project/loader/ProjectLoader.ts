@@ -7,19 +7,19 @@ import {InternalAxiosRequestConfig} from "axios";
 const ID = "project-detail"
 
 async function Loader(props: LoaderFunctionArgs) {
-    const {uuid} = props.params
+    console.log({props})
+
+    const uuid = "cf8175ca-e53c-46e8-84b1-f073ccb87c8d"
+
+    const teste = http.defaults.headers.common["Project-UUID"]
+
+    console.log({teste, t: http.defaults.headers})
 
     const response = await projectUseCase.getByUUID(uuid ?? "")
 
     if(response.error){
         redirect("/home")
     }
-
-    http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-        config.headers["Project-UUID"] = response.data?.uuid ?? ""
-
-        return config
-    })
 
     return response.data!
 }

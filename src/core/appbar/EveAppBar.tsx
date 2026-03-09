@@ -24,7 +24,7 @@ export const EveAppBar = () => {
             </Stack>
             <Stack direction={"row"} alignItems={"center"} gap={1}>
                 {
-                    routes.map((r, i) => (
+                    routes.filter(x => x.appBar).map((r, i) => (
                         <EveAppBarOption
                             key={`crm_app_bar_option_${i}`}
                             {...r}

@@ -21,13 +21,12 @@ export interface Pagination<T> {
 }
 
 export interface EveRoute {
-    id?: string,
-    index?: boolean,
-    path: string,
-    label: string,
-    icon?: SvgIconComponent,
-    children?: ReactElement | EveRoute[],
-    loader?: (prop: LoaderFunctionArgs) => Promise<unknown>,
+    id?: string
+    index?: boolean
+    path: string
+    label: string
+    icon?: SvgIconComponent
+    children?: ReactElement | EveRoute[]
+    loader?: (prop: LoaderFunctionArgs) => Promise<unknown>
+    appBar?: boolean
 }
-
-export const UserToken = "user-token"

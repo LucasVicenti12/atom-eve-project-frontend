@@ -9,6 +9,7 @@ import InsertChartOutlinedRoundedIcon from "@mui/icons-material/InsertChartOutli
 import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
 import {useTranslation} from "react-i18next";
 import {matchPath, useLocation} from "react-router-dom";
+import {Platforms} from "../../../modules/platforms/page/Platforms.tsx";
 
 export function useCurrentRoute(): EveRoute {
     const routes = useRoutes()
@@ -26,36 +27,42 @@ export function useRoutes(): EveRoute[] {
     return [
         {
             path: "home",
+            code: "home",
             label: t("modules.home"),
             children: <Home/>,
             appBar: true,
         },
         {
-            path: "project",
+            path: "project/:uuid",
+            code: "project-general",
             id: ProjectLoader.ID,
             loader: ProjectLoader.Loader,
             label: t("modules.project"),
             children: [
                 {
                     path: "",
+                    code: "project-general",
                     label: t("modules.general"),
                     icon: AutoGraphRoundedIcon,
                     children: <Project/>
                 },
                 {
                     path: "platform",
+                    code: "project-platform",
                     label: t("modules.platform"),
                     icon: DevicesRoundedIcon,
-                    children: <Project/>
+                    children: <Platforms/>
                 },
                 {
                     path: "task",
+                    code: "project-task",
                     label: t("modules.task"),
                     icon: InsertChartOutlinedRoundedIcon,
                     children: <Project/>
                 },
                 {
                     path: "config",
+                    code: "project-config",
                     label: t("modules.config"),
                     icon: SettingsSuggestRoundedIcon,
                     children: <Project/>

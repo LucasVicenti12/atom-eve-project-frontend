@@ -9,11 +9,11 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import {EveRoute} from "../../utils/entities/entities.ts";
 import {useNavigate} from "react-router";
-import {useAuth} from "../../modules/auth/provider/UseAuth.ts";
 import {popup} from "../../utils/alerts/Popup.ts";
+import {useLocation, useParams} from "react-router-dom";
 
 export const EveNavBar = () => {
-    const {logout} = useAuth()
+    const nav = useNavigate()
 
     const [open, setOpen] = useAtom(LayoutState.NavOpen);
 
@@ -22,9 +22,9 @@ export const EveNavBar = () => {
     if (isValidElement(current.children)) return
 
     const handleConfirmLogout = () => {
-        popup.confirm("question", "Sair", "Deseja sair da sua conta?", "Sim").then((result) => {
+        popup.confirm("question", "Voltar para a tela inicial", "", "Sim").then((result) => {
             if (result.isConfirmed) {
-                logout().then()
+                nav("/home")
             }
         })
     }
@@ -93,7 +93,6 @@ export const EveNavBar = () => {
                         <EveNavBarOption
                             key={`crm_nav_bar_option_${i}`}
                             basePath={current.path}
-                            isCurrent={current.path === x.path}
                             {...x}
                         />
                     ))
@@ -136,17 +135,27 @@ export const EveNavBar = () => {
 
 interface CrmNavBarOptionProps extends EveRoute {
     basePath: string
-    isCurrent: boolean
 }
 
 const EveNavBarOption = (props: CrmNavBarOptionProps) => {
     const nav = useNavigate()
 
+    const pathname = useLocation().pathname
+
+    const parts = props.basePath.split(":")
+    const paramName = parts.length > 1 ? parts[1] : null
+    const params = useParams()
+
+    const param = paramName ? params[paramName] ?? "" : ""
+
     const open = useAtomValue(LayoutState.NavOpen)
 
     const Icon = props.icon!
 
-    const subpath = props.path ? `/${props.basePath}/${props.path}` : `/${props.basePath}`
+    const basePath = props.basePath.replace(`:${paramName}`, param)
+    const subpath = props.path ? `/${basePath}/${props.path}` : `/${basePath}`
+
+    const isCurrent = pathname === subpath
 
     return (
         <ListItem onClick={() => nav(subpath)}>
@@ -154,17 +163,17 @@ const EveNavBarOption = (props: CrmNavBarOptionProps) => {
                 open ? (
                     <ListItemButton
                         sx={{height: "40px"}}
-                        color={props.isCurrent ? "primary" : "neutral"}
-                        variant={props.isCurrent ? "soft" : "plain"}
+                        color={isCurrent ? "primary" : "neutral"}
+                        variant={isCurrent ? "soft" : "plain"}
                     >
                         <Icon
                             fontSize={"small"}
-                            color={props.isCurrent ? "primary" : "inherit"}
+                            color={isCurrent ? "primary" : "inherit"}
                         />
                         <ListItemContent>
                             <Typography
                                 level="title-sm"
-                                color={props.isCurrent ? "primary" : "neutral"}
+                                color={isCurrent ? "primary" : "neutral"}
                                 sx={{
                                     textWrap: "nowrap",
                                 }}
@@ -175,7 +184,7 @@ const EveNavBarOption = (props: CrmNavBarOptionProps) => {
                     </ListItemButton>
                 ) : (
                     <ListItemButton
-                        color={props.isCurrent ? "primary" : "neutral"}
+                        color={isCurrent ? "primary" : "neutral"}
                         sx={{
                             display: "flex",
                             justifyContent: "center",
@@ -185,7 +194,7 @@ const EveNavBarOption = (props: CrmNavBarOptionProps) => {
                     >
                         <Icon
                             fontSize={"small"}
-                            color={props.isCurrent ? "primary" : "inherit"}
+                            color={isCurrent ? "primary" : "inherit"}
                         />
                     </ListItemButton>
                 )

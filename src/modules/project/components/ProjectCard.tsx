@@ -3,8 +3,6 @@ import {Box, Typography} from "@mui/joy";
 import {ElevatedBox} from "../../../utils/components/container/ElevatedBox.tsx";
 import dayjs from "dayjs";
 import {useNavigate} from "react-router-dom";
-import {http} from "../../../config/http/Http.ts";
-import {InternalAxiosRequestConfig} from "axios";
 
 export const ProjectCard = (props: Project) => {
     const nav = useNavigate()
@@ -40,12 +38,7 @@ export const ProjectCard = (props: Project) => {
                             }
                         }}
                         onClick={() => {
-                            http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-                                config.headers["Project-UUID"] = props.uuid
-
-                                return config
-                            })
-                            nav("/project")
+                            nav(`/project/${props.uuid}`)
                         }}
                     >
                         {props.name}

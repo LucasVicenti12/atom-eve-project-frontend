@@ -7,13 +7,13 @@ import {InternalAxiosRequestConfig} from "axios";
 const ID = "project-detail"
 
 async function Loader(props: LoaderFunctionArgs) {
-    console.log({props})
+    const uuid = props.params.uuid!
 
-    const uuid = "cf8175ca-e53c-46e8-84b1-f073ccb87c8d"
+    http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+        config.headers["Project-UUID"] = uuid
 
-    const teste = http.defaults.headers.common["Project-UUID"]
-
-    console.log({teste, t: http.defaults.headers})
+        return config
+    })
 
     const response = await projectUseCase.getByUUID(uuid ?? "")
 

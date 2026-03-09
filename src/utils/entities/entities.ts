@@ -22,6 +22,7 @@ export interface Pagination<T> {
 
 export interface EveRoute {
     id?: string
+    code: string
     index?: boolean
     path: string
     label: string
